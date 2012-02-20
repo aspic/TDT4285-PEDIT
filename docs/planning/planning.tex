@@ -18,5 +18,80 @@
 
 \tableofcontents
 
+\section{Planning Phase}
+
+We are to setup and configure a email server.
+
+The goal of this document is to reflect the choices of technology, how
+we plan to meet the requirements and what we need in order to meet them.
+The document is split into three parts. Discussion and planning around
+the SLA, our proposed solution and what that solution may depend on.
+
+\subsection{SLA (Service level agreement)}
+The service level agreement for this service is split into two parts,
+namely the general SLA (which all groups follow), and a service specific
+SLA for the email-part. Both parts are discussed and evaluated below.
+
+\subsubsection{The general SLA}
+All requirements in the general SLA seem to be feasible. Many of the
+requirements (like availability, performance and reliability) is
+directly dependent on the operative system which our service will be
+running on. 
+
+
+\subsubsection{The service specific SLA}
+Our service shall and must support:
+Email delivery from the whole world with ESMTP.
+Email sending from the system.
+Email folders readable by IMAP.
+Spam filtering/limiting incoming mail.
+
+These requirements are typical requirements for an arbitrary email
+server. There exist lots of software to fulfill these requirements. The
+hardest part is to decide on what software we want to use. We try to
+keep the number of services required as low as possible, so that the
+implementation and maintenance will be a bare minimum.
+
+\textbf{Performance:}
+All requirements regarding performance seems to be feasible. 10 seconds
+as a time threshold for outgoing and incoming mail is highly achievable.
+We will use spam-detection provided by ITEA. We believe that this
+solution will detect at least 70% of all incoming spam, and then the
+service will deliver that spam to a special folder for the user.
+
+\textbf{Security:}
+The mail server will be forced to only allow outgoing mail from users on
+the system. The authentication will be through LDAP, which is the basic
+authentication mechanism on the server.
+
+\subsection{Solution}
+
+We have chosen to implement Exim[1] as the Mail Transfer Agent. Exim har
+support for ESMTP, and is licensed with the GNU General Public
+License[2]. We chose this MTA because the group has some previous
+experience in implementing and configuring Exim. Exim also supports
+everything needed by the SLA, and supports many different authentication
+methods, such as LDAP and SQL. 
+
+For IMAP, we have chosen dovecot. Dovecot is an open source IMAP and
+POP3 email server for Linux/UNIX-like systems, written with security
+primarily in mind[3]. We chose this because it offers both the mbox and
+Maildir directive, in addition to POP3 and IMAP mail delivery. In
+addition, the group has previous experience implementing and configuring
+dovecot for mail delivery, and it plugs directly into the SMTP backend
+of Exim.
+
+For spam protection, we will use the RBL-services (or DNSBL)  of ITEA,
+which are free since our server is located on campus. This can be
+configured by following http://www.exim.org/howto/rbl.html and the URL
+of this service is zen-spamhaus.itea.ntnu.no.
+
+\subsection{Dependencies}
+Both Exim and Dovecot depend on a Unix environment to run. For this, we
+depend on the OS-group to implement a Unix environment, preferably
+debian-based.
+We also need the server to be located at NTNU, because of the
+spam-protection service provided by ITEA. 
+
 \newpage
 \end{document}

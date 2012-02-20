@@ -66,16 +66,16 @@ authentication mechanism on the server.
 
 \subsection{Solution}
 
-We have chosen to implement Exim[1] as the Mail Transfer Agent. Exim har
+We have chosen to implement Exim\cite{exim} as the Mail Transfer Agent. Exim har
 support for ESMTP, and is licensed with the GNU General Public
-License[2]. We chose this MTA because the group has some previous
+License\cite{gnu-license}. We chose this MTA because the group has some previous
 experience in implementing and configuring Exim. Exim also supports
 everything needed by the SLA, and supports many different authentication
 methods, such as LDAP and SQL. 
 
 For IMAP, we have chosen dovecot. Dovecot is an open source IMAP and
 POP3 email server for Linux/UNIX-like systems, written with security
-primarily in mind[3]. We chose this because it offers both the mbox and
+primarily in mind\cite{dovecot}. We chose this because it offers both the mbox and
 Maildir directive, in addition to POP3 and IMAP mail delivery. In
 addition, the group has previous experience implementing and configuring
 dovecot for mail delivery, and it plugs directly into the SMTP backend
@@ -94,4 +94,6 @@ We also need the server to be located at NTNU, because of the
 spam-protection service provided by ITEA. 
 
 \newpage
+
+\input{citations}
 \end{document}

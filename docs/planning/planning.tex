@@ -68,7 +68,7 @@ authentication mechanism on the server.
 \end{description}
 \subsection{Solution}
 
-We have chosen to implement Exim\cite{exim} as the Mail Transfer Agent. Exim har
+We have chosen to implement Exim\cite{exim} as the Mail Transfer Agent. Exim has
 support for ESMTP, and is licensed with the GNU General Public
 License\cite{gnu-license}. We chose this MTA because the group has some previous
 experience in implementing and configuring Exim. Exim also supports
@@ -83,10 +83,10 @@ addition, the group has previous experience implementing and configuring
 dovecot for mail delivery, and it plugs directly into the SMTP backend
 of Exim.
 
-For spam protection, we will use the RBL-services (or DNSBL)  of ITEA,
+For spam protection, we will use the RBL-services (or DNSBL) of ITEA,
 which are free since our server is located on campus. This can be
-configured by following http://www.exim.org/howto/rbl.html and the URL
-of this service is zen-spamhaus.itea.ntnu.no.
+configured by following \url{http://www.exim.org/howto/rbl.html} and the URL
+of this service is \url{zen-spamhaus.itea.ntnu.no}.
 
 If this service for some reason will be unavailable or unsuitable for
 this project, a fall back service will be

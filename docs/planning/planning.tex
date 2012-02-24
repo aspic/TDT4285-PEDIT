@@ -20,7 +20,7 @@
 
 \section{Planning Phase}
 
-We are to setup and configure a email server.
+We are to setup and configure an email server.
 
 The goal of this document is to reflect the choices of technology, how
 we plan to meet the requirements and what we need in order to meet them.
@@ -54,18 +54,20 @@ hardest part is to decide on what software we want to use. We try to
 keep the number of services required as low as possible, so that the
 implementation and maintenance will be a bare minimum.
 
-\textbf{Performance:}
+\begin{description}
+\item[Performance] \hfill \\
 All requirements regarding performance seems to be feasible. 10 seconds
 as a time threshold for outgoing and incoming mail is highly achievable.
 We will use spam-detection provided by ITEA. We believe that this
-solution will detect at least 70% of all incoming spam, and then the
+solution will detect at least 70\% of all incoming spam, and then the
 service will deliver that spam to a special folder for the user.
 
-\textbf{Security:}
+\item[Security] \hfill \\
 The mail server will be forced to only allow outgoing mail from users on
 the system. The authentication will be through LDAP, which is the basic
 authentication mechanism on the server.
 
+\end{description}
 \subsection{Solution}
 
 We have chosen to implement Exim\cite{exim} as the Mail Transfer Agent. Exim has
@@ -83,10 +85,17 @@ addition, the group has previous experience implementing and configuring
 dovecot for mail delivery and it plugs directly into the SMTP backend
 of Exim.
 
-For spam protection, we will use the RBL-services (or DNSBL)  of ITEA,
+For spam protection, we will use the RBL-services (or DNSBL) of ITEA,
 which are free since our server is located on campus. This can be
-configured by following http://www.exim.org/howto/rbl.html and the URL
-of this service is zen-spamhaus.itea.ntnu.no.
+configured by following \url{http://www.exim.org/howto/rbl.html} and the URL
+of this service is \url{zen-spamhaus.itea.ntnu.no}.
+
+If this service for some reason will be unavailable or unsuitable for
+this project, a fall back service will be
+SpamAssassin\cite{spamassassin}. SpamAssassin is highly configurable,
+can be run for the mail server, or individual users. The system is also
+widely used in the industry, thus a lot of setup guides and
+troubleshooting guides exist.
 
 \subsection{Dependencies}
 Both Exim and Dovecot depend on a Unix environment to run. For this, we

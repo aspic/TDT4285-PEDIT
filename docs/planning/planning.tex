@@ -52,18 +52,20 @@ hardest part is to decide on what software we want to use. We try to
 keep the number of services required as low as possible, so that the
 implementation and maintenance will be a bare minimum.
 
-\textbf{Performance:}
+\begin{description}
+\item[Performance] \hfill \\
 All requirements regarding performance seems to be feasible. 10 seconds
 as a time threshold for outgoing and incoming mail is highly achievable.
 We will use spam-detection provided by ITEA. We believe that this
 solution will detect at least 70\% of all incoming spam, and then the
 service will deliver that spam to a special folder for the user.
 
-\textbf{Security:}
+\item[Security] \hfill \\
 The mail server will be forced to only allow outgoing mail from users on
 the system. The authentication will be through LDAP, which is the basic
 authentication mechanism on the server.
 
+\end{description}
 \subsection{Solution}
 
 We have chosen to implement Exim\cite{exim} as the Mail Transfer Agent. Exim har

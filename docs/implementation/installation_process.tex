@@ -1,0 +1,58 @@
+\section{Installation process}
+This section describes the installation process, what was configured and
+what choices we made regarding the setup. This section should serve as a
+``stand alone'' guide, that will be sufficient when setting up a
+identical system from scratch.
+\subsection{Pre-conditions}
+The following guide assumes that these conditions has been met:
+\begin{itemize}
+	\item The server is running Debian Squeeze, installed with the base
+system
+	\item The acting user has root access
+	\item A text editor is installed (we assume Vim)
+\end{itemize}
+\subsection{Install procedure}
+This section will describe the installation procedure step by step.
+\subsubsection{Exim}
+Exim4 is bundled with the base system of Debian Squeeze, hence we only
+needed to reconfigure the package configuration file.
+\begin{lstlisting}
+sudo dpkg-reconfigure exim4-config #Start reconfigure interface
+\end{lstlisting}
+Through this interface the Exim server will be reconfigured to suit our
+needs. Each dialogue (in order will be described below), and what option
+we chose will be highlighted. In the first dialogue, press
+\emph{OK}.
+\begin{enumerate}
+\item\textbf{General type of mail configuration:}\\
+By default only local delivery works in Exim. Since we want to
+send/receive external mail, and since the mail is sent my the NTNU
+gateway, choose: \emph{mail sent by smarthost; received via SMTP or
+fetchmail}.
+\item\textbf{System mail name:}\\
+Enter \emph{tdt4285.idi.ntnu.no}.
+\item\textbf{Exim IP configuration warning}\\
+Read through the information and press \emph{OK}.
+\item\textbf{Enter IP-address to listen on for incoming SMTP
+connections}\\
+The IP address can be found in several ways. We execute nslookup:
+\begin{lstlisting}
+nslookup tdt4285.idi.ntnu.no
+
+Server:		129.241.0.200
+Address:	129.241.0.200#53
+
+Non-authoritative answer:
+Name:	tdt4285.idi.ntnu.no
+Address: 129.241.106.91
+\end{lstlisting}
+Enter the address the \emph{129.241.106.91}.
+\item\textbf{Other destinations for which mail is accepted}\\
+Enter \emph{tdt4285.idi.ntnu.no}.
+\item\textbf{Machines to relay mail for:}\\
+Leave this field empty.
+\item\textbf{IP address or host name for the outgoing smarthost:}\\
+We need to define the outgoing smarthost for SMTP. Since NTNU has closed
+port 25 for outgoing traffic. We will us the main mail gateway which
+NTNU provided. Enter \emph{mailgw.ntnu.no}.
+\end{enumerate}

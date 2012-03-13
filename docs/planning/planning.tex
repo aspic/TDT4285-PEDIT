@@ -35,16 +35,18 @@ SLA for the email-part. Both parts are discussed and evaluated below.
 \subsubsection{The general SLA}
 All requirements in the general SLA seem to be feasible. Many of the
 requirements (like availability, performance and reliability) is
-directly dependent on the operative system which our service will be
+directly dependent on the operating system which our service will be
 running on. 
 
 
 \subsubsection{The service specific SLA}
 Our service shall and must support:
-Email delivery from the whole world with ESMTP.
-Email sending from the system.
-Email folders readable by IMAP.
-Spam filtering/limiting incoming mail.
+\begin{itemize}
+\item{Email delivery from the whole world with ESMTP.}
+\item{Email sending from the system.}
+\item{Email folders readable by IMAP.}
+\item{Spam filtering/limiting incoming mail.}
+\end{itemize}
 
 These requirements are typical requirements for an arbitrary email
 server. There exist lots of software to fulfill these requirements. The
@@ -80,13 +82,20 @@ POP3 email server for Linux/UNIX-like systems, written with security
 primarily in mind\cite{dovecot}. We chose this because it offers both the mbox and
 Maildir directive, in addition to POP3 and IMAP mail delivery. In
 addition, the group has previous experience implementing and configuring
-dovecot for mail delivery, and it plugs directly into the SMTP backend
+dovecot for mail delivery and it plugs directly into the SMTP backend
 of Exim.
 
 For spam protection, we will use the RBL-services (or DNSBL) of ITEA,
 which are free since our server is located on campus. This can be
 configured by following \url{http://www.exim.org/howto/rbl.html} and the URL
 of this service is \url{zen-spamhaus.itea.ntnu.no}.
+
+If this service for some reason will be unavailable or unsuitable for
+this project, a fall back service will be
+SpamAssassin\cite{spamassassin}. SpamAssassin is highly configurable,
+can be run for the mail server, or individual users. The system is also
+widely used in the industry, thus a lot of setup guides and
+troubleshooting guides exist.
 
 \subsection{Dependencies}
 Both Exim and Dovecot depend on a Unix environment to run. For this, we

@@ -1,0 +1,52 @@
+#
+# Exim
+#
+
+# Install procedure
+dpkg-reconfigure exim4-config
+
+- General type of mail configuration:
+mail sent by smarthost, received via SMTP or fetchmail
+
+- System mail name
+tdt4285.idi.ntnu.no
+
+- Ip address for SMTP
+129.241.106.91
+
+- Other destination for which mail is accepted.
+tdt4285.idi.ntnu.no
+
+
+- Relay
+none
+
+- Hide local mail name
+no
+
+- Dial on demand
+no
+
+- System delivered mail location
+~/Maildir
+
+# Config procedure
+Standard maildir = ~/Maildir
+
+# Since port 25 outgoing is blocked by NTNU, we want to listen to an
+# alternative port. In the config file /etc/default/exim we define:
+- We configured mailgw.ntnu.no as a smarhost for exim.
+dc_smarthost='reddo6.itea.ntnu.no'
+
+
+#
+# Dovecot
+#
+
+Started with:
+aptitude install dovecot-imapd
+
+# Config procedure
+#
+
+

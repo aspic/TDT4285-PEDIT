@@ -55,6 +55,15 @@ Leave this field empty.
 We need to define the outgoing smarthost for SMTP. Since NTNU has closed
 port 25 for outgoing traffic. We will us the main mail gateway which
 NTNU provided. Enter \emph{mailgw.ntnu.no}.
+\item\textbf{Dial-on-demand}\\
+Since our server has ``always-on'' internet access, answer \emph{NO}.
+\item\textbf{Delivery method for local mail:}\\
+Mbox uses a single file for the complete mail folder, while the
+Maildir-approach split mails and place them in a folder located in
+$\sim$/Maildir. Choose the second method \emph{Maildir format}.
+\item\textbf{Configuration format:}
+In this step choose to split the configuration file into several other
+smaller files
 \end{enumerate}
 
 \subsubsection{Handling spam}
@@ -69,3 +78,22 @@ dnslists = blackholes.mail-abuse.org : \
 # Reject messages from senders listed in these DNSBLs
 deny dnslists = zen-spamhaus.itea.ntnu.no
 \end{lstlisting}
+Exim is now fully configured.
+
+\subsubsection{Dovecot}
+Dovecot will be our IMAP service and is located in the package
+repository in Debian Squeeze. First, install the dovecot package.
+\begin{lstlisting}
+sudo aptitude install dovecot-imapd
+\end{lstlisting}
+Most parts of the dovecot default configuration will suffice, we only
+need to tell it where to find the user mail.
+\begin{enumerate}
+	\item\textbf{Open the configuration file:}\\
+ 	\emph{sudo vim /etc/dovecot/dovecot.conf}
+	\item\textbf{Locate the maildir section, and set correct maildir:}\\
+	Put \emph{mail\_location = maildir:$\sim$/Maildir} in the
+	configuration file.
+\end{enumerate}
+Dovecot is now fully installed and configured.
+>>>>>>> feb43dafba0afa8c1b39666ad662b75ca8198326

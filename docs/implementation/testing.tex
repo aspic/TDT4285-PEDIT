@@ -1,0 +1,18 @@
+\section{Testing}
+\subsection{Spam}
+This section details testing the zen-spamhaus functionality of Exim.
+\subsubsection{Input}
+To test the spamhaus functionality you need to use the exim4 CLI as detailed below.
+\begin{lstlisting}
+# exim4 -bhc 192.203.178.178
+helo pbl.crynwr.com
+mail from:asdf@pbl.crynwr.com
+rcpt to:kjetime@tdt4285.idi.ntnu.no
+\end{lstlisting}
+
+\subsubsection{Expected output}
+\begin{lstlisting}
+>>> deny: condition test succeeded
+550-X-Warning: 192.293.178.178 is listed at zen-spamhaus.itea.ntnu.no
+...contd
+\end{lstlisting}

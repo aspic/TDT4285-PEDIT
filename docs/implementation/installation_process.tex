@@ -65,7 +65,25 @@ $\sim$/Maildir. Choose the second method \emph{Maildir format}.
 In this step choose to split the configuration file into several other
 smaller files
 \end{enumerate}
+
+\subsubsection{Handling spam}
+To handle SPAM we will use the DNSBL-servers from NTNU IT which is free of use
+for any server situated on campus. This needs to be handled by Exim.
+
+\begin{enumerate}
+  \item Edit \emph{/etc/exim4/conf.d/main/02\_exim4-config\_options} and add the following at the end of the file:
+\begin{lstlisting}
+# Add Spamhaus protection
+CHECK_RCPT_IP_DNSBLS = zen-spamhaus.itea.ntnu.no}
+\end{lstlisting}
+
+\item Edit \emph{/etc/exim4/conf.d/acl/30\_exim4-config\_check\_rcpt} and search for DNSBLS and substitute 'warn' for 'deny'.
+
+\item Restart Exim using \emph{/etc/init.d/exim4 restart}
+\end{enumerate}
+
 Exim is now fully configured.
+
 \subsubsection{Dovecot}
 Dovecot will be our IMAP service and is located in the package
 repository in Debian Squeeze. First, install the dovecot package.
@@ -82,19 +100,4 @@ need to tell it where to find the user mail.
 	configuration file.
 \end{enumerate}
 Dovecot is now fully installed and configured.
-\subsubsection{Handling spam}
-To handle SPAM we will use the DNSBL-servers from NTNU IT which is free of use
-for any server situated on campus. This needs to be handled by Exim.
-
-\begin{enumerate}
-  \item Edit \emph{/etc/exim4/conf.d/main/02\_exim4-config\_options} and add the following at the end of the file:
-\begin{lstlisting}
-# Add Spamhaus protection
-CHECK_RCPT_IP_DNSBLS = zen-spamhaus.itea.ntnu.no}
-\end{lstlisting}
-
-\item Edit \emph{/etc/exim4/conf.d/acl/30\_exim4-config\_check\_rcpt} and search for DNSBLS and substitute 'warn' for 'deny'.
-
-\item Restart Exim using \emph{/etc/init.d/exim4 restart}
-\end{enumerate}
 

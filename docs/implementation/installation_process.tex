@@ -85,11 +85,16 @@ Dovecot is now fully installed and configured.
 \subsubsection{Handling spam}
 To handle SPAM we will use the DNSBL-servers from NTNU IT which is free of use
 for any server situated on campus. This needs to be handled by Exim.
-\begin{lstlisting}
-warn message = X-blacklisted-at: $dnslist_domain
-dnslists = blackholes.mail-abuse.org : \
-           dialup.mail-abuse.org
 
-# Reject messages from senders listed in these DNSBLs
-deny dnslists = zen-spamhaus.itea.ntnu.no
+\begin{enumerate}
+  \item Edit \emph{/etc/exim4/conf.d/main/02\_exim4-config\_options} and add the following at the end of the file:
+\begin{lstlisting}
+# Add Spamhaus protection
+CHECK_RCPT_IP_DNSBLS = zen-spamhaus.itea.ntnu.no}
 \end{lstlisting}
+
+\item Edit \emph{/etc/exim4/conf.d/acl/30\_exim4-config\_check\_rcpt} and search for DNSBLS and substitute 'warn' for 'deny'.
+
+\item Restart Exim using \emph{/etc/init.d/exim4 restart}
+\end{enumerate}
+

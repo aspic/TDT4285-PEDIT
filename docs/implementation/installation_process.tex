@@ -14,9 +14,12 @@ system
 \subsection{Install procedure}
 This section will describe the installation procedure step by step.
 \subsubsection{Exim}
-Exim4 is bundled with the base system of Debian Squeeze, hence we only
-needed to reconfigure the package configuration file.
+Exim4 is bundled with the base system of Debian Squeeze, but it does not
+natively support authentication via libpam. For this we need to install
+exim4-deamon-heavy which has built-in support. After this we only have to
+reconfigure exim4.
 \begin{lstlisting}
+sudo aptitude install exim4-deamon-heavy
 sudo dpkg-reconfigure exim4-config #Start reconfigure interface
 \end{lstlisting}
 Through this interface the Exim server will be reconfigured to suit our

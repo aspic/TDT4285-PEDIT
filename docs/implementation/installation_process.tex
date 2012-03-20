@@ -56,3 +56,16 @@ We need to define the outgoing smarthost for SMTP. Since NTNU has closed
 port 25 for outgoing traffic. We will us the main mail gateway which
 NTNU provided. Enter \emph{mailgw.ntnu.no}.
 \end{enumerate}
+
+\subsubsection{Handling spam}
+To handle SPAM we will use the DNSBL-servers from NTNU IT which is free of use
+for any server situated on campus. This needs to be handled by Exim.
+
+\begin{lstlisting}
+warn message = X-blacklisted-at: $dnslist_domain
+dnslists = blackholes.mail-abuse.org : \
+           dialup.mail-abuse.org
+
+# Reject messages from senders listed in these DNSBLs
+deny dnslists = zen-spamhaus.itea.ntnu.no
+\end{lstlisting}

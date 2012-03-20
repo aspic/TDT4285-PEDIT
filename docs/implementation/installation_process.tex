@@ -65,21 +65,7 @@ $\sim$/Maildir. Choose the second method \emph{Maildir format}.
 In this step choose to split the configuration file into several other
 smaller files
 \end{enumerate}
-
-\subsubsection{Handling spam}
-To handle SPAM we will use the DNSBL-servers from NTNU IT which is free of use
-for any server situated on campus. This needs to be handled by Exim.
-
-\begin{lstlisting}
-warn message = X-blacklisted-at: $dnslist_domain
-dnslists = blackholes.mail-abuse.org : \
-           dialup.mail-abuse.org
-
-# Reject messages from senders listed in these DNSBLs
-deny dnslists = zen-spamhaus.itea.ntnu.no
-\end{lstlisting}
 Exim is now fully configured.
-
 \subsubsection{Dovecot}
 Dovecot will be our IMAP service and is located in the package
 repository in Debian Squeeze. First, install the dovecot package.
@@ -96,3 +82,14 @@ need to tell it where to find the user mail.
 	configuration file.
 \end{enumerate}
 Dovecot is now fully installed and configured.
+\subsubsection{Handling spam}
+To handle SPAM we will use the DNSBL-servers from NTNU IT which is free of use
+for any server situated on campus. This needs to be handled by Exim.
+\begin{lstlisting}
+warn message = X-blacklisted-at: $dnslist_domain
+dnslists = blackholes.mail-abuse.org : \
+           dialup.mail-abuse.org
+
+# Reject messages from senders listed in these DNSBLs
+deny dnslists = zen-spamhaus.itea.ntnu.no
+\end{lstlisting}

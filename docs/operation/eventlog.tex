@@ -1,4 +1,19 @@
 %What happened during the 
 %operation phase? Include downtime, 
-%power outages, break-in attempts, etc.\begin{flushright}
+
+%power outages, break-in attempts, etc.
+This section describes the events we discovered during the operational
+phase.
+\subsection{Exim and Dovecot}
+We checked the various logs for both Exim and Dovecot. The log for Exim
+is located in \begin{verbatim}/var/log/exim4\end{verbatim} and Dovecot
+by default logs to \begin{verbatim}/var/log/syslog\end{verbatim}
+
+No huge events were discovered for either Exim or Dovecot after
+grepping through the logs. Both systems had been running and functioning
+during the operational phase.
+\subsection{The general system}
+By running ``uptime'' in a shell on the server, the output was
+\begin{verbatim}12:43:11 up 43 days, 19:37,  7 users,  load average: 1.28, 1.33, 1.24\end{verbatim}
+meaning that the system had not been down during the operational phase.
 

@@ -1,4 +1,29 @@
 \section{Testing}
+\subsection{Sending mail}
+This section will test whether the mail sending actually works.
+\subsubsection{Input}
+Start mutt (a text based mail sending client) on the server, write a
+mail and send to both an internal and external address.
+\begin{lstlisting}
+mutt # starts mutt
+press 'm' # creates a new mail
+To: jonasei@tdt4285.idi.ntnu.no, kjetil861@gmail.com # add addresses
+Subject: test # add subject
+press ':', write 'wq' # save mail
+press 'y' # send the mail
+\end{lstlisting}
+\subsubsection{Expected output}
+A mail will be received at the two valid addresses
+jonasei@tdt4285.idi.ntnu.no (internal) and kjetil861@gmail.com
+(external).
+\subsection{Receiving mail}
+Send a mail from an external address. By default Exim delivers internal
+mail so that function is not necessary to test.
+\subsubsection{Input}
+Create and send a mail from an external mail client like Gmail, Yahoo or
+another mail provider. Send mail to kjetime@tdt4285.idi.ntnu.no.
+\subsubsection{Expected output}
+A new mail will be delivered to the user, kjetime.
 \subsection{Spam}
 This section details testing the zen-spamhaus functionality of Exim.
 \subsubsection{Input}

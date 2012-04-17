@@ -1,0 +1,48 @@
+\section{System description}
+This section describes the different components used to fulfill and
+execute the planning phase. We will briefly mention the software and
+protocols used, and how they are integrated into the server.
+\subsection{Software}
+The following software was used to create our Email service.
+\subsubsection{Exim}
+Exim, our (E)SMTP server, was installed through apt-get and it had a simple
+'plug-and-play' installation guide. There was some automatization and
+configuration issues regarding standardizing the defualt port: We were
+not able to use port 25, which is the default outgoing port for any mail
+service because NTNU has disabled this port. \\
+We choose to use NTNU's mailgateway \emph{mailgw.ntnu.no} for our
+outgoing port, rather then using a custom port through
+\emph{tdt4285.idi.ntnu.no}\\ A consequence of this will be that the user
+will have to specify the outgoing port in their Email client manually,
+then rather using the defualt adress \emph{tdt4285.idi.ntnu.no:25}.
+Since port 25 would have never worked in the first place, it was
+inevitable that some client-side configuration was necessary.
+\subsubsection{Dovecot}
+Dovecot, the IMAP server was in the package repository, hence we had
+only to install it. This was not an issues since Dovecot is a simple
+'plug-and-play' application that requires minimal configuration. \\
+We were able to use the default port 143 for incoming mail, in any Email
+client by connecting to the server with:
+\emph{username@tdt4285.idi.ntnu.no:143}.
+\subsection{Protocols}
+\subsubsection{IMAP}
+Internet message access protocol (IMAP) is the standard protocol for
+mail retrieval which is implemented in the application layer. It has a
+simple set of messages and commands that can be sent and recieved
+between the client-application and the email server. These messages and
+commands allows a client to remotely access email on an email server by
+provding a valid username and password.
+\subsubsection{SMTP}
+The Simple Mail Transfer Protocol (SMTP) handles mail submissions by the
+client and makes them accessible to the recieving client to retrive it
+via the IMAP protocol. It uses several intermediate server to complete
+this processes, including a mail submission agent (MSA) server and a
+mail transfer agent (MTA).
+\subsection{Other}
+\subsubsection{Monitoring}
+During the implementation we created some simple monitoring tools with
+the use of Linux's command \emph{tail -f} to read any error messages 
+during an email submission or retrival (mail.err). As well as to confirm 
+that that our mail server accepted the email (mail.log).\\
+
+

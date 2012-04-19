@@ -39,7 +39,25 @@ different reasons for rejection and lists how many individual emails
 that were the reason for these rejections. As we can derive from the
 figure, a total of 8 mails were rejected due to relay permissions. We
 believe the cause of this is misconfiguration of one or more
-IMAP-clients.
+IMAP-clients. Below is the descriptions of the different rejection
+reasons:
+\begin{description}
+\item \textbf{Rejected RCPT: relay not permitted} error means that someone tried to relay mail
+using our SMTP server, which is not permitted. This can be caused by someone
+using an email-client and using our SMTP server as an outgoing SMTP server
+which, according to the SLA, is not permitted.
+
+\item \textbf{SMTP protocol synchronization} error means that something or someone tried to
+talk to our SMTP server using a non-spec SMTP protocol implementation. This can
+be caused by someone manually telneting to our SMTP server and mess about with
+it, or a faulty implementation.
+
+\item \textbf{Rejected RCPT: Unrouteable address} means that the server could find the
+specified address, and therefore, could not deliver the email. This error can be
+avoided if you want by specifying that all unroutable mail should go to a
+specified address, more often than not root@example.com. 
+
+\end{description}
 \begin{figure}[h!]
 %  \vspace{-20pt}
   \begin{center}
@@ -49,7 +67,6 @@ IMAP-clients.
   \caption{\bf{Amount of email per day}}
   \label{fig:amount}
 \end{figure}
-
 Figure~\ref{fig:amount} describes the amount of email per day. From the
 straight and coherent lines showing the sent and received statistics we
 can deduct that all mail was probably sent and received by the same

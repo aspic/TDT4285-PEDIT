@@ -3,8 +3,35 @@
 %sentations, not by your technical accomplishments.
 %Please be honest.)
 \section{Status}
+In this section we will evaluate our accomplishments according to the SLA. 
+
+\subsection{Performance}
+\begin{itemize}
+\item \textbf{70\% of all spam should be filtered or marked on delivery from an
+external machine.}
+
 Sending and receiving mail (both local on the system, and through IMAP)
 did functioning throughout the operational phase.
 We did not have time to install/configure SpamAssassin before the
 operational phase, which means the server could receieve more spam than
 we agreed to in the SLA.
+
+\item \textbf{90\% of all mails should be delivered to local mailboxes within 10
+seconds from delivery.}
+\item \textbf{90\% of all outgoing mail should be attempted sent within 10
+seconds of sending.}
+
+We cannot guarantee delivery within 10 seconds as according to the SLA. We
+initially thought exim automatically logged and generated reports based on
+attempted delivery time, but this feature was disabled by default. However, all of our sample tests
+showed that email was indeed delivered within the 10 second specification, we
+cannot with 100\% certainty guarantee this for all mail. 
+
+\item \textbf{The system should not offer an open mail relay. Any mail attempted
+sent shall be authenticated by the system before attempted delivery.}
+
+Exim was set up to disallow any attempted delivery from external users. This was
+monitored using eximstats, as shown above. 
+
+\end{itemize}
+

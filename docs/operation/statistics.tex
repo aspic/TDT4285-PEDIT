@@ -30,7 +30,27 @@ The first table (fig. 1) describes the amount of email processed (sent and recei
   \caption{\bf{Reasons for rejection}}
 \end{figure}
 
-As an operator it's interesting to know why a particular email did not reach it's destination. The second table (fig. 2) describes the different reasons for rejection and lists how many individual emails were affected.\newline
+As an operator it's interesting to know why a particular email did not reach
+it's destination. The second table (fig. 2) describes the different reasons for
+rejection and lists how many individual emails were affected.
+
+\begin{description}
+\item \textbf{Rejected RCPT: relay not permitted} error means that someone tried to relay mail
+using our SMTP server, which is not permitted. This can be caused by someone
+using an email-client and using our SMTP server as an outgoing SMTP server
+which, according to the SLA, is not permitted.
+
+\item \textbf{SMTP protocol synchronization} error means that something or someone tried to
+talk to our SMTP server using a non-spec SMTP protocol implementation. This can
+be caused by someone manually telneting to our SMTP server and mess about with
+it, or a faulty implementation.
+
+\item \textbf{Rejected RCPT: Unrouteable address} means that the server could find the
+specified address, and therefore, could not deliver the email. This error can be
+avoided if you want by specifying that all unroutable mail should go to a
+specified address, more often than not root@example.com. 
+
+\end{description}
 
 \begin{figure}[h!]
 %  \vspace{-20pt}
